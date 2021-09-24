@@ -10,14 +10,16 @@
           Movie
         </h2>
         <Movies
-        :movies="movies"/>
+        :movies="movies"
+        id="movies"/>
       </div>
       <div v-if="series.length!=0">
         <h2>
           Series
         </h2>
-        <Series
-        :series="series"/>
+        <Movies
+        :movies="series"
+        id="serie"/>
       </div>
     </main>
   </div>
@@ -27,7 +29,7 @@
 import axios from 'axios'
 import Header from './components/Header.vue'
 import Movies from './components/Movies.vue'
-import Series from './components/Series.vue'
+//import Series from './components/Series.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 
@@ -38,7 +40,7 @@ export default {
   components: {
     Header,
     Movies,
-    Series,
+    //Series,
   },
   data(){
     return {

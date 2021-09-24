@@ -2,7 +2,7 @@
 <div class="movie">
 	<button class="bottoni left" v-if="maxLeft" @click="scroll_left"><font-awesome-icon icon="chevron-left"/></button>
 	<button class="bottoni right" v-if="maxRight" @click="scroll_right"><font-awesome-icon icon="chevron-right"/></button>
-	<ul class="row d-flex p-0 flex-nowrap wrap-box">
+	<ul class="row d-flex p-0 flex-nowrap wrap-box" :id="id">
 		<Item
 			v-for="(movie,index) in movies" :key="index" class="col-2"
 			:item="movie"
@@ -15,7 +15,7 @@
 import Item from './Item.vue'
 export default {
     name: 'Movies',
-    props:["movies"],
+    props:["movies","id"],
     components: {
 		Item
     },
@@ -27,7 +27,7 @@ export default {
 	},
     methods:{
 		scroll_left() {
-			let content = document.querySelector(".wrap-box");
+			let content = document.querySelector("#"+this.id);
 			content.scrollLeft -= 250;
 			if(content.scrollLeft==0){
 				this.maxLeft= false
@@ -35,7 +35,7 @@ export default {
 			else{
 				this.maxLeft= true
 			}
-			if(content.scrollLeft>=(content.scrollWidth-content.offsetWidth - 200)){
+			if(content.scrollLeft>=(content.scrollWidth-content.offsetWidth - 2)){
 				this.maxRight= false
 			}
 			else{
@@ -43,7 +43,7 @@ export default {
 			}
 		},
 		scroll_right() {
-			let content = document.querySelector(".wrap-box");
+			let content = document.querySelector("#"+this.id);
 			content.scrollLeft += 250;
 			if(content.scrollLeft==0){
 				this.maxLeft= false
@@ -51,7 +51,7 @@ export default {
 			else{
 				this.maxLeft= true
 			}
-			if(content.scrollLeft>=(content.scrollWidth-content.offsetWidth - 200)){
+			if(content.scrollLeft>=(content.scrollWidth-content.offsetWidth - 2)){
 				this.maxRight= false
 			}
 			else{
