@@ -46,10 +46,13 @@ export default {
       movie: "movie",
       tv: "tv",
       key:"?api_key=d372f19f679767467d9a71f921e1c8f4",
-      querry: "&query=",
+      querry: "&query=a",
       movies:[],
       series:[],
     }
+  },
+  created(){
+    this.getMovie();
   },
   methods: {
     getMovie(){
