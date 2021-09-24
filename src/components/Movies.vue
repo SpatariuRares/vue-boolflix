@@ -93,7 +93,7 @@ ul{
 				top: 0;
 				left: 0;
 				background-color: black;
-				animation: slit-out-vertical 0.5s linear both;
+				animation: slit-out-vertical 0.4s linear both;
 				color: white;
 					p{
 						margin: 0;
@@ -109,17 +109,17 @@ ul{
 				background: transparent;  /* Optional: just make scrollbar invisible */
 			}
 			.image{
-				animation: slit-in-vertical 0.5s linear both;
-				animation-delay:0.5s;
+				animation: slit-in-vertical 0.4s linear both;
+				animation-delay:0.4s;
 			}
 		}
 		li>.box-movie:hover{
 			.image{
-				animation: slit-out-vertical 0.5s linear both;
+				animation: slit-out-vertical 0.4s linear both;
 			}
 			.info{
-				animation: slit-in-vertical 0.5s linear both;
-				Animation-delay:0.5s;
+				animation: slit-in-vertical 0.4s linear both;
+				Animation-delay:0.4s;
 			}
 		}
 		
