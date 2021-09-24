@@ -3,9 +3,9 @@
 	<button class="bottoni left" v-if="maxLeft" @click="scroll_left"><font-awesome-icon icon="chevron-left"/></button>
 	<button class="bottoni right" v-if="maxRight" @click="scroll_right"><font-awesome-icon icon="chevron-right"/></button>
 	<ul class="row d-flex p-0 flex-nowrap wrapper-box">
-		<Serieitem  
+		<Item  
 		v-for="(serie,index) in series" :key="index" class="col-2"
-		:serie="serie"
+		:item="serie"
 		/>
 	</ul>
 </div>
@@ -14,12 +14,12 @@
 
 
 <script>
-import Serieitem from './Serieitem.vue'
+import Item from './Item.vue'
 export default {
     name: 'Series',
     props:["series"],
     components: {
-        Serieitem,
+        Item,
     },
 	data(){
 		return {

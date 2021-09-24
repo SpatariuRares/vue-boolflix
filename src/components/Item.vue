@@ -2,31 +2,31 @@
 <li>
 	<div class="box-movie">
 		<div class="image">
-				<div class="poster" v-if="movie.poster_path">
-						<img :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`"  alt="">
+				<div class="poster" v-if="item.poster_path">
+						<img :src="`https://image.tmdb.org/t/p/w342${item.poster_path}`"  alt="">
 				</div>
 				<div class="poster not_film" v-else>
 				</div>
 		</div>
 		<div class=" info">
-			<country-flag :country='getFlag(movie.original_language)' size='small'/>
+			<country-flag :country='getFlag(item.original_language)' size='small'/>
 			<p>
 				<span>
 					Titolo: 	
 				</span>
-				{{movie.original_title}}
+				{{item.original_title}}
 			</p>
 			<p>
 				<span>
 					voto: 
 				</span>
-				<font-awesome-icon icon="star" v-for="(n,index) in 5" :class="getActive(movie.vote_average,n)" :key="index"/>
+				<font-awesome-icon icon="star" v-for="(n,index) in 5" :class="getActive(item.vote_average,n)" :key="index"/>
 			</p>
 			<p>
 				<span>
 					overview: 
 				</span>
-				{{movie.overview}}
+				{{item.overview}}
 			</p>
 			
 		</div>
@@ -37,8 +37,8 @@
 <script>
 import CountryFlag from 'vue-country-flag'
 export default {
-    name: 'Movieitem',
-	props:["movie"],
+    name: "Item",
+	props:["item"],
     components: {
         CountryFlag,
     },
