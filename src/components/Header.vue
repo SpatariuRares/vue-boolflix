@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-content-between py-4">
+  <div class="row justify-content-between py-4 px-2">
     <h2 class="col-4">BOOLFLIX</h2>
     <Search 
     @search="getsearch"

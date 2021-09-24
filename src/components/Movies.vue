@@ -1,60 +1,63 @@
 <template>
-  <ul class="row d-flex p-0 flex-nowrap">
-      <li v-for="(movie,index) in movies" :key="index" class="col-2">
-		<div class="box-movie">
-			<div class="image">
-					<div class="poster" v-if="movie.poster_path">
-							<img :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`"  alt="">
-					</div>
-					<div class="poster not_film" v-else>
-					</div>
-			</div>
-            <div class=" info">
-				<country-flag :country='getFlag(movie.original_language)' size='small'/>
-				<p>
-					<span>
-						Titolo: 	
-					</span>
-					{{movie.original_title}}
-				</p>
-				<p>
-					<span>
-						voto: 
-					</span>
-					<font-awesome-icon icon="star" v-for="(n,index) in 5" :class="getActive(movie.vote_average,n)" :key="index"/>
-				</p>
-                <p>
-					<span>
-						overview: 
-					</span>
-					{{movie.overview}}
-				</p>
-                
-            </div>
-          </div>
-      </li>
-  </ul>
+<div class="movie">
+	<button class="bottoni left" v-if="maxLeft" @click="scroll_left"><font-awesome-icon icon="chevron-left"/></button>
+	<button class="bottoni right" v-if="maxRight" @click="scroll_right"><font-awesome-icon icon="chevron-right"/></button>
+	<ul class="row d-flex p-0 flex-nowrap wrapper-box">
+		<Movieitem
+			v-for="(movie,index) in movies" :key="index" class="col-2"
+			:movie="movie"
+		/>
+	</ul>
+</div>
 </template>
 
 <script>
-import CountryFlag from 'vue-country-flag'
+import Movieitem from './movieitem.vue'
 export default {
     name: 'Movies',
     props:["movies"],
     components: {
-        CountryFlag,
+		Movieitem
     },
+	data(){
+		return {
+			maxLeft:false,
+			maxRight:true,
+		}
+	},
     methods:{
-        getFlag(language){
-            if(language=="en")return "gb"
-            return language
-        },
-        getActive(vote,number){
-            vote=vote/2;
-            vote=Math.floor(vote);
-            if(number<=vote) return "yellow";
-            return null
-        }
+		scroll_left() {
+			let content = document.querySelector(".wrapper-box");
+			content.scrollLeft -= 250;
+			if(content.scrollLeft==0){
+				this.maxLeft= false
+			}
+			else{
+				this.maxLeft= true
+			}
+			if(content.scrollLeft==(content.scrollWidth-content.offsetWidth)){
+				this.maxRight= false
+			}
+			else{
+				this.maxRight= true
+			}
+		},
+		scroll_right() {
+			let content = document.querySelector(".wrapper-box");
+			content.scrollLeft += 250;
+			if(content.scrollLeft==0){
+				this.maxLeft= false
+			}
+			else{
+				this.maxLeft= true
+			}
+			if(content.scrollLeft==(content.scrollWidth-content.offsetWidth)){
+				this.maxRight= false
+			}
+			else{
+				this.maxRight= true
+			}
+		},
     }
 }
 
@@ -62,73 +65,40 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.movie {
+	position: relative;
+}
+.bottoni{
+	height:100%;
+	border: 0;
+	background-color:rgba(0, 0, 0, 0.31);
+	position:absolute;
+	margin:5px;
+	z-index: 999;
+	top: 0;
+	width: 50px;
+	margin: 0;
+	color:white;
+	&.left{
+		left: 0;
+	}
+	&.right{
+		right: 0;
+	}
+}
+.wrapper-box{
+	overflow: scroll;
+	-ms-overflow-style: none;  /* Internet Explorer 10+ */
+	scrollbar-width: none;
+}
+.wrapper-box::-webkit-scrollbar {
+	width: 0;  /* Remove scrollbar space */
+	height:0 ;
+	background: transparent;  /* Optional: just make scrollbar invisible */
+}
 ul{
     list-style: none;
     margin: 0;
-   li>div{
-        width: 100%;
-        &>div, .not_film, .poster{
-            width: 100%;
-            aspect-ratio: 9/15;
-            img{
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
-    }
-		li>.box-movie{
-			position: relative;
-			main{
-					overflow: scroll;
-					
-				}
-			
-			.info{
-				padding:10px;
-				overflow: scroll;
-				-ms-overflow-style: none;  /* Internet Explorer 10+ */
-				scrollbar-width: none;
-				position: absolute;
-				top: 0;
-				left: 0;
-				background-color: black;
-				animation: slit-out-vertical 0.4s linear both;
-				color: white;
-					p{
-						margin: 0;
-						font-size:0.8rem;
-						span{
-							font-weight: 800;
-						}
-					}
-			}
-			.info::-webkit-scrollbar {
-				width: 0;  /* Remove scrollbar space */
-				height:0 ;
-				background: transparent;  /* Optional: just make scrollbar invisible */
-			}
-			.image{
-				animation: slit-in-vertical 0.4s linear both;
-				animation-delay:0.4s;
-			}
-		}
-		li>.box-movie:hover{
-			.image{
-				animation: slit-out-vertical 0.4s linear both;
-			}
-			.info{
-				animation: slit-in-vertical 0.4s linear both;
-				Animation-delay:0.4s;
-			}
-		}
-		
-    .not_film{
-        background-color: black;
-    }
-    .yellow{
-        color: yellow;
-    } 
 }
 
 @keyframes slit-out-vertical {

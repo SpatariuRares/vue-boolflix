@@ -1,10 +1,10 @@
 <template>
-  <div id="app" class="container-fluid">
+  <div id="app" class="container-fluid px-0">
     <Header 
     @search="getsearch"
     class="header"
     />
-    <main class="container-fluid">
+    <main class="container-fluid px-0">
       <div v-if="movies.length!=0">
         <h2>
           Movie
@@ -81,7 +81,9 @@ export default {
 }
 main{
   height: calc(100vh - 100px);
-  overflow: scroll;
+  padding-bottom: 100px;
+  overflow-x: hidden;
+  overflow-y: scroll;
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   scrollbar-width: none;
 }
