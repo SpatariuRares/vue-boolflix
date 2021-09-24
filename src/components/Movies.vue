@@ -1,34 +1,34 @@
 <template>
   <ul class="row d-flex p-0 flex-nowrap">
       <li v-for="(movie,index) in movies" :key="index" class="col-2">
-					<div class="box-movie">
-						<div class="image">
-								<div class="poster" v-if="movie.poster_path">
-										<img :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`"  alt="">
-								</div>
-								<div class="poster not_film" v-else>
-								</div>
-						</div>
+		<div class="box-movie">
+			<div class="image">
+					<div class="poster" v-if="movie.poster_path">
+							<img :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`"  alt="">
+					</div>
+					<div class="poster not_film" v-else>
+					</div>
+			</div>
             <div class=" info">
-								<country-flag :country='getFlag(movie.original_language)' size='small'/>
-								<p>
-									<span>
-										Titolo: 	
-									</span>
-									{{movie.original_title}}
-								</p>
-								<p>
-									<span>
-										voto: 
-									</span>
-									<font-awesome-icon icon="star" v-for="(n,index) in 5" :class="getActive(movie.vote_average,n)" :key="index"/>
-								</p>
+				<country-flag :country='getFlag(movie.original_language)' size='small'/>
+				<p>
+					<span>
+						Titolo: 	
+					</span>
+					{{movie.original_title}}
+				</p>
+				<p>
+					<span>
+						voto: 
+					</span>
+					<font-awesome-icon icon="star" v-for="(n,index) in 5" :class="getActive(movie.vote_average,n)" :key="index"/>
+				</p>
                 <p>
-									<span>
-										overview: 
-									</span>
-									{{movie.overview}}
-								</p>
+					<span>
+						overview: 
+					</span>
+					{{movie.overview}}
+				</p>
                 
             </div>
           </div>
@@ -109,15 +109,17 @@ ul{
 				background: transparent;  /* Optional: just make scrollbar invisible */
 			}
 			.image{
-				animation: slit-in-vertical 0.45s linear both;
+				animation: slit-in-vertical 0.5s linear both;
+				animation-delay:0.5s;
 			}
 		}
 		li>.box-movie:hover{
 			.image{
-					animation: slit-out-vertical 0.5s linear both;
+				animation: slit-out-vertical 0.5s linear both;
 			}
 			.info{
-				animation: slit-in-vertical 0.45s linear both;
+				animation: slit-in-vertical 0.5s linear both;
+				Animation-delay:0.5s;
 			}
 		}
 		
@@ -130,23 +132,21 @@ ul{
 }
 
 @keyframes slit-out-vertical {
-  0% {
-    transform:  rotateY(0);
-    opacity: 1;
+   0% {
+    transform: rotateY(0);
   }
   100% {
     transform: rotateY(90deg);
-    opacity: 0;
+	opacity: 0;
   }
 }
 @keyframes slit-in-vertical {
-  0% {
-    transform: rotateY(-90deg);
-    opacity: 0;
+    0% {
+    transform: rotateY(90deg);
   }
   100% {
-    transform:rotateY(0);
-		opacity: 1;
+    transform: rotateY(0);
+	opacity: 1;
   }
 }
 </style>
