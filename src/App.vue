@@ -10,7 +10,6 @@
           Movie
         </h2>
         <Movies
-        
         :movies="movies"/>
       </div>
       <div v-if="series.length!=0">
@@ -78,12 +77,19 @@ export default {
   height: 100px;
 }
 main{
-  min-height: calc(100vh - 100px);
-  div{
-    overflow: hidden;
-  }
+  height: calc(100vh - 100px);
+  overflow: scroll;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;
 }
+main::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    height:0 ;
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
 #app{
+  overflow: hidden;
   background-color:#434343 ;
 }
 </style>
