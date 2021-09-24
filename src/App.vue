@@ -5,28 +5,19 @@
     class="header"
     />
     <main class="container-fluid px-0">
-      <div v-if="movies.length!=0">
+      <div v-for="(element,index) in elenco" :key="index">
         <h2>
-          Movie
+          {{element}}
         </h2>
         <Movies
-        :movies="movies"
-        id="movies"/>
-      </div>
-      <div v-if="series.length!=0">
-        <h2>
-          Series
-        </h2>
-        <Movies
-        :movies="series"
-        id="serie"/>
+        :id="element"/>
       </div>
     </main>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+
 import Header from './components/Header.vue'
 import Movies from './components/Movies.vue'
 //import Series from './components/Series.vue'
@@ -40,38 +31,12 @@ export default {
   components: {
     Header,
     Movies,
-    //Series,
   },
   data(){
     return {
-      APIUrl:"https://api.themoviedb.org/3/search/",
-      movie: "movie",
-      tv: "tv",
-      key:"?api_key=d372f19f679767467d9a71f921e1c8f4",
-      querry: "&query=a",
-      movies:[],
-      series:[],
+      elenco:["movie","tv"],
     }
   },
-  created(){
-    this.getMovie();
-  },
-  methods: {
-    getMovie(){
-      axios.get(this.APIUrl+this.movie+this.key+this.querry).then(response => {
-        this.movies=response.data.results;
-      })
-      axios.get(this.APIUrl+this.tv+this.key+this.querry).then(response => {
-        this.series=response.data.results;
-      })
-    },
-    getsearch(info){
-      this.querry="&query="+info;
-      if(this.querry!="&query="){
-        this.getMovie();
-      }
-    }
-  }  
 }
 </script>
 

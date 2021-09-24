@@ -12,20 +12,42 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Item from './Item.vue'
 export default {
     name: 'Movies',
-    props:["movies","id"],
+    props:["id"],
     components: {
 		Item
     },
 	data(){
 		return {
+			APIUrl:"https://api.themoviedb.org/3/search/",
+			key:"?api_key=d372f19f679767467d9a71f921e1c8f4",
+			querry: "&query=a",
+			movies:[],
 			maxLeft:false,
 			maxRight:true,
 		}
 	},
+	created(){
+		this.getMovie();
+	}, 
     methods:{
+		getMovie(){
+			axios.get(this.APIUrl+this.id+this.key+this.querry).then(response => {
+				this.movies=response.data.results;
+			})
+			axios.get(this.APIUrl+this.id+this.key+this.querry).then(response => {
+				this.series=response.data.results;
+			})
+			},
+		getsearch(info){
+			this.querry="&query="+info;
+			if(this.querry!="&query="){
+				this.getMovie();
+			}
+		},
 		scroll_left() {
 			let content = document.querySelector("#"+this.id);
 			content.scrollLeft -= 250;
@@ -107,7 +129,6 @@ ul{
   }
   100% {
     transform: rotateY(90deg);
-	opacity: 0;
   }
 }
 @keyframes slit-in-vertical {
@@ -116,7 +137,6 @@ ul{
   }
   100% {
     transform: rotateY(0);
-	opacity: 1;
   }
 }
 </style>
