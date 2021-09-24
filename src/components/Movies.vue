@@ -2,7 +2,7 @@
 <div class="movie">
 	<button class="bottoni left" v-if="maxLeft" @click="scroll_left"><font-awesome-icon icon="chevron-left"/></button>
 	<button class="bottoni right" v-if="maxRight" @click="scroll_right"><font-awesome-icon icon="chevron-right"/></button>
-	<ul class="row d-flex p-0 flex-nowrap wrapper-box">
+	<ul class="row d-flex p-0 flex-nowrap wrap-box">
 		<Item
 			v-for="(movie,index) in movies" :key="index" class="col-2"
 			:item="movie"
@@ -27,7 +27,7 @@ export default {
 	},
     methods:{
 		scroll_left() {
-			let content = document.querySelector(".wrapper-box");
+			let content = document.querySelector(".wrap-box");
 			content.scrollLeft -= 250;
 			if(content.scrollLeft==0){
 				this.maxLeft= false
@@ -35,7 +35,7 @@ export default {
 			else{
 				this.maxLeft= true
 			}
-			if(content.scrollLeft==(content.scrollWidth-content.offsetWidth)){
+			if(content.scrollLeft>=(content.scrollWidth-content.offsetWidth - 200)){
 				this.maxRight= false
 			}
 			else{
@@ -43,7 +43,7 @@ export default {
 			}
 		},
 		scroll_right() {
-			let content = document.querySelector(".wrapper-box");
+			let content = document.querySelector(".wrap-box");
 			content.scrollLeft += 250;
 			if(content.scrollLeft==0){
 				this.maxLeft= false
@@ -51,7 +51,7 @@ export default {
 			else{
 				this.maxLeft= true
 			}
-			if(content.scrollLeft==(content.scrollWidth-content.offsetWidth)){
+			if(content.scrollLeft>=(content.scrollWidth-content.offsetWidth - 200)){
 				this.maxRight= false
 			}
 			else{
@@ -86,12 +86,12 @@ export default {
 		right: 0;
 	}
 }
-.wrapper-box{
+.wrap-box{
 	overflow: scroll;
 	-ms-overflow-style: none;  /* Internet Explorer 10+ */
 	scrollbar-width: none;
 }
-.wrapper-box::-webkit-scrollbar {
+.wrap-box::-webkit-scrollbar {
 	width: 0;  /* Remove scrollbar space */
 	height:0 ;
 	background: transparent;  /* Optional: just make scrollbar invisible */
