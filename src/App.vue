@@ -9,7 +9,7 @@
         <h2>
           {{element}}
         </h2>
-        <Movies
+        <Row
         :id="element"/>
       </div>
     </main>
@@ -19,7 +19,7 @@
 <script>
 
 import Header from './components/Header.vue'
-import Movies from './components/Movies.vue'
+import Row from './components/Row.vue'
 //import Series from './components/Series.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
@@ -30,7 +30,7 @@ export default {
   name: 'App',
   components: {
     Header,
-    Movies,
+    Row,
   },
   data(){
     return {

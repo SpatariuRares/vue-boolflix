@@ -64,7 +64,7 @@ export default {
         width: 100%;
         &>div, .not_film, .poster{
             width: 100%;
-            aspect-ratio: 9/15;
+            aspect-ratio: 9/16;
             img{
                 width: 100%;
                 height: 100%;

@@ -2,7 +2,7 @@
 <div class="movie">
 	<button class="bottoni left" v-if="maxLeft" @click="scroll_left"><font-awesome-icon icon="chevron-left"/></button>
 	<button class="bottoni right" v-if="maxRight" @click="scroll_right"><font-awesome-icon icon="chevron-right"/></button>
-	<ul class="row d-flex p-0 flex-nowrap wrap-box" :id="id">
+	<ul class="row d-flex flex-nowrap wrap-box" :id="id">
 		<Item
 			v-for="(movie,index) in movies" :key="index" class="col-2"
 			:item="movie"
@@ -91,21 +91,27 @@ export default {
 	position: relative;
 }
 .bottoni{
+	opacity: 0;
 	height:100%;
+	font-size: 2rem;
 	border: 0;
 	background-color:rgba(0, 0, 0, 0.31);
 	position:absolute;
 	margin:5px;
 	z-index: 999;
 	top: 0;
-	width: 50px;
 	margin: 0;
 	color:white;
+	padding:0 20px;
+	transition: opacity 0.5s;
 	&.left{
 		left: 0;
 	}
 	&.right{
 		right: 0;
+	}
+	&:hover{
+		opacity: 1;
 	}
 }
 .wrap-box{
@@ -119,6 +125,7 @@ export default {
 	background: transparent;  /* Optional: just make scrollbar invisible */
 }
 ul{
+	padding: 0 20px;
     list-style: none;
     margin: 0;
 }
