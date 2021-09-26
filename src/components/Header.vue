@@ -1,16 +1,15 @@
 <template>
   <div class="row justify-content-between py-4 px-2">
     <h1 class="col-4">BOOLFLIX</h1>
-    <div class="col-4 d-flex">
       <Selection
         :options="genres"
         @filtergerne="filtergerne"
+        class="col-2"
       />
       <Search 
       @search="getsearch"
+      class="col-4"
       />
-
-    </div>
   </div>
 </template>
 
