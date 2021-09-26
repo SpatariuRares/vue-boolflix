@@ -7,6 +7,7 @@
 			v-for="(movie,index) in movies" :key="index" class="col-2"
 			:item="movie"
 			:genres="genres"
+			:filtergerner="filtergerner"
 		/>
 	</ul>
 </div>
@@ -17,7 +18,7 @@ import axios from 'axios'
 import Item from './Item.vue'
 export default {
     name: 'Row',
-    props:["search","id","genres"],
+    props:["search","id","genres","filtergerner"],
     components: {
 		Item
     },

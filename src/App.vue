@@ -3,6 +3,7 @@
     <Header 
     :genres="genres"
     @search="getsearch"
+    @filtergerne="filtergerne"
     class="header"
     />
     <main class="container-fluid px-0">
@@ -14,6 +15,7 @@
         :search="search"
         :id="element"
         :genres="genres"
+        :filtergerner="filtergerner"
         />
       </div>
     </main>
@@ -40,7 +42,8 @@ export default {
     return {
       elenco:["movie","tv"],
       search:"",
-      genres:[]
+      genres:[],
+      filtergerner:"all"
     }
   },
   created(){
@@ -50,7 +53,7 @@ export default {
       movie = response.data.genres;
       axios.get("https://api.themoviedb.org/3/genre/tv/list?api_key=d372f19f679767467d9a71f921e1c8f4").then(response => {
         tv=(response.data.genres);
-        for (let i = 0; i < movie.length; i++) {
+        for (let i = 0; i < movie.length-1; i++) {
           for (let j = 0; j < tv.length-1;) {
             if(movie[i].id==tv[j].id){
               tv.splice(j, 1);
@@ -61,13 +64,29 @@ export default {
           }
         }
         this.genres = [ ...movie, ...tv ];
-        console.log(this.genres);
       });
     });
   },
+  watch:{
+		genres: function(){
+			let array=[];
+			for (let i = 0; i < this.item.genre_ids.length; i++) {
+				for (let j = 0; j < this.genres.length-1; j++) {
+					if(this.item.genre_ids[i]==this.genres[j].id){
+						array.push(this.genres[j])
+					}
+				}
+			}
+			this.genersName=array
+		},
+	},
   methods:{
     getsearch(info){
       this.search=info;
+    },
+    filtergerne(info){
+      console.log("app")
+      this.filtergerner=info
     }
   }
 }
@@ -87,6 +106,10 @@ main{
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   scrollbar-width: none;
 }
+h2{
+  padding: 0 20px;
+  font-weight: 700;
+}
 main::-webkit-scrollbar {
     width: 0;  /* Remove scrollbar space */
     height:0 ;
@@ -95,6 +118,6 @@ main::-webkit-scrollbar {
 
 #app{
   overflow: hidden;
-  background-color:#434343 ;
+  background-color:#222 ;
 }
 </style>

@@ -1,24 +1,42 @@
 <template>
   <div class="row justify-content-between py-4 px-2">
-    <h2 class="col-4">BOOLFLIX</h2>
-    <Search 
-    @search="getsearch"
-    class="col-3"
-    />
+    <h1 class="col-4">BOOLFLIX</h1>
+    <div class="col-4 d-flex">
+      <Selection
+        :options="genres"
+        @filtergerne="filtergerne"
+      />
+      <Search 
+      @search="getsearch"
+      />
+
+    </div>
   </div>
 </template>
 
 <script>
 import Search from './Search.vue'
+import Selection from './Selection.vue'
 export default {
   name: 'Header',
   components:{
     Search,
+    Selection,
   },
   props:["genres"],
+  data(){
+    return {
+      gerne:"all",
+      genersName:[]
+    }
+  },
   methods:{
     getsearch(info){
       this.$emit('search',info)
+    },
+    filtergerne(info){
+      console.log("header")
+      this.$emit('filtergerne',info);
     }
   }
 }
@@ -29,7 +47,7 @@ export default {
 div{
   background-color: #000;
 }
-h2{
+h1{
   color: #f00;
   font-weight: 900;
 }

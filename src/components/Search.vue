@@ -21,12 +21,6 @@ export default {
       ricerca:''
     }
   },
-  methods:{
-    reset(){
-      this.ricerca="";
-      this.$emit=('search',this.ricerca)
-    }
-  }
 }
 
 </script>

@@ -1,5 +1,5 @@
 <template>
-<li>
+<li v-if="getShow()">
 	<div class="box-movie">
 		<div class="image">
 				<div class="poster" v-if="item.poster_path">
@@ -49,7 +49,7 @@ import CountryFlag from 'vue-country-flag'
 import axios from 'axios'
 export default {
     name: "Item",
-	props:["item","genres"],
+	props:["item","genres","filtergerner"],
     components: {
         CountryFlag,
     },
@@ -68,7 +68,7 @@ export default {
 	watch:{
 		genres: function(){
 			let array=[];
-			for (let i = 0; i < this.item.genre_ids.length; i++) {
+			for (let i = 0; i < this.item.genre_ids.length-1; i++) {
 				for (let j = 0; j < this.genres.length-1; j++) {
 					if(this.item.genre_ids[i]==this.genres[j].id){
 						array.push(this.genres[j])
@@ -97,6 +97,17 @@ export default {
             if(number<=vote) return "yellow";
             return null
         },
+		getShow(){
+			if(this.filtergerner=="all"){
+				return true;
+			}
+			for(let i=0;i<this.item.genre_ids.length-1;i++){
+				if(this.item.genre_ids[i]==this.filtergerner){
+					return true
+				}
+			}
+			return false
+		}
     }
 }
 
