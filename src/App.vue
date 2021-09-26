@@ -73,7 +73,6 @@ export default {
       this.search=info;
     },
     filtergerne(info){
-      console.log("app")
       this.filtergerner=info
     }
   }

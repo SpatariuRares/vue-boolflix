@@ -40,6 +40,9 @@ export default {
 			}
 			this.getMovie();
 		},
+		filtergerner:function(){
+
+		}
 	},
 	created(){
 		this.querry="&query=a";

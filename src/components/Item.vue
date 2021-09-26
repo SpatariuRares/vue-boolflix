@@ -47,55 +47,57 @@
 	</li>
 	<div v-if="detail" @click="hidedetail()" class=" detail-container">
 		<div class="position-absolute top-50 start-50 translate-middle info">
-			<img :src="`https://image.tmdb.org/t/p/w342${item.backdrop_path}`"  alt="">
-			<div class="text">
-				<div class="d-flex justify-content-between">
-					<div class="d-flex align-items-center">
-						<span>
-							Titolo: 	
-						</span>
-						<h2>
-							{{item.original_title}}
-						</h2>
+			<div class="info-container">
+				<img :src="`https://image.tmdb.org/t/p/w342${item.backdrop_path}`"  alt="">
+				<div class="text">
+					<div class="d-flex justify-content-between">
+						<div class="d-flex align-items-center">
+							<span>
+								Titolo: 	
+							</span>
+							<h2>
+								{{item.original_title}}
+							</h2>
+						</div>
+						<div>
+							<span>
+								voto: 
+							</span>
+							<font-awesome-icon icon="star" v-for="(n,index) in 5" :class="getActive(item.vote_average,n)" :key="index"/>
+						</div>
 					</div>
-					<div>
+					<div class="d-flex">
 						<span>
-							voto: 
+							overview: 
 						</span>
-						<font-awesome-icon icon="star" v-for="(n,index) in 5" :class="getActive(item.vote_average,n)" :key="index"/>
+						<p>
+							{{item.overview}}
+						</p>
 					</div>
-				</div>
-				<div class="d-flex">
-					<span>
-						overview: 
-					</span>
-					<p>
-						{{item.overview}}
-					</p>
-				</div>
-				<div class="d-flex flex-wrap">
-					<p>
-						cast: 
-					</p>
-					<div class="container">
-						<div class="row">
-							<div v-for="(actor,index) in cast" :key="actor.name+index" class="d-flex col-4 flex-column align-items-center actor ">
-								<img :src="`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${actor.profile_path}`"  alt="">
-								<p >
-									{{actor.character}}: {{actor.name}}
-								</p>
+					<div class="d-flex flex-wrap">
+						<p>
+							cast: 
+						</p>
+						<div class="container">
+							<div class="row">
+								<div v-for="(actor,index) in cast" :key="actor.name+index" class="d-flex col-4 flex-column align-items-center actor ">
+									<img :src="`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${actor.profile_path}`"  alt="">
+									<p >
+										{{actor.character}}: {{actor.name}}
+									</p>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="d-flex">
-					<span>
-						gener:
-					</span> 
-					<p class="gener" v-for="(genre,index) in genersName" :key="genre.name+index">
-						{{genre.name}}
-					</p>
+					<div class="d-flex">
+						<span>
+							gener:
+						</span> 
+						<p class="gener" v-for="(genre,index) in genersName" :key="genre.name+index">
+							{{genre.name}}
+						</p>
 
+					</div>
 				</div>
 			</div>
 		</div>
@@ -149,7 +151,7 @@ export default {
 			id+="/credits"
 			axios.get(this.APIUrl+id+this.key).then(response => {
 				this.cast = response.data.cast;
-				this.cast.splice(5)
+				this.cast.splice(6)
 			})
 		},
         getFlag(language){
@@ -261,6 +263,17 @@ export default {
 			background-color:#333;
 			border-radius: 3em;
 			color: white;
+			.info-container{
+				width: 100%;
+				height: 100%;
+				overflow-y:scroll;
+				-ms-overflow-style: none;  /* Internet Explorer 10+ */
+				scrollbar-width: none;
+				&::-webkit-scrollbar {
+				width: 0;  /* Remove scrollbar space */
+				height:0 ;
+				background: transparent;  /* Optional: just make scrollbar invisible */
+			}
 			img{
 				width: 100%;
 				height:50%;
@@ -269,9 +282,7 @@ export default {
 			.text{
 				padding: 10px 30px;
 				height:50%;
-				overflow-y:scroll;
-				-ms-overflow-style: none;  /* Internet Explorer 10+ */
-				scrollbar-width: none;
+				
 				.actor{
 					img{
 						width: 150px;
@@ -285,14 +296,10 @@ export default {
 						padding: 0 5px;
 					}
 				}
-				&::-webkit-scrollbar {
-				width: 0;  /* Remove scrollbar space */
-				height:0 ;
-				background: transparent;  /* Optional: just make scrollbar invisible */
-			}
 			}
 		}
 	}
+}
 @keyframes slit-out-vertical {
    0% {
     transform: rotateY(0);

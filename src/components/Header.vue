@@ -42,7 +42,6 @@ export default {
       this.$emit('search',info)
     },
     filtergerne(info){
-      console.log("header")
       this.$emit('filtergerne',info);
     }
   }
