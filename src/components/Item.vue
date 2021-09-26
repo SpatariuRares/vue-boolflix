@@ -28,7 +28,17 @@
 				</span>
 				{{item.overview}}
 			</p>
-			
+			<span>
+				cast: 
+			</span>
+			<p v-for="(actor,index) in cast" :key="index">
+				{{actor.character}}: {{actor.name}}
+			</p>
+			<p >
+				<span v-for="(genre,index) in genersName" :key="index">
+					{{genre.name}}
+				</span>
+			</p>
 		</div>
 	</div>
 </li>
@@ -36,13 +46,47 @@
 
 <script>
 import CountryFlag from 'vue-country-flag'
+import axios from 'axios'
 export default {
     name: "Item",
-	props:["item"],
+	props:["item","genres"],
     components: {
         CountryFlag,
     },
+	data(){
+		return {
+			APIUrl:"https://api.themoviedb.org/3/movie/",
+			key:"?api_key=d372f19f679767467d9a71f921e1c8f4",
+			cast:[],
+			genersName:[],
+		}
+	},
+	created(){
+		this.getcast();
+		this.getgenres();
+	},
+	watch:{
+		genres: function(){
+			let array=[];
+			for (let i = 0; i < this.item.genre_ids.length; i++) {
+				for (let j = 0; j < this.genres.length-1; j++) {
+					if(this.item.genre_ids[i]==this.genres[j].id){
+						array.push(this.genres[j])
+					}
+				}
+			}
+			this.genersName=array
+		},
+	},
     methods:{
+		getcast(){
+			let id = this.item.id;
+			id+="/credits"
+			axios.get(this.APIUrl+id+this.key).then(response => {
+				this.cast = response.data.cast;
+				this.cast.splice(5)
+			})
+		},
         getFlag(language){
             if(language=="en")return "gb"
             return language

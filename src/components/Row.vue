@@ -6,6 +6,7 @@
 		<Item
 			v-for="(movie,index) in movies" :key="index" class="col-2"
 			:item="movie"
+			:genres="genres"
 		/>
 	</ul>
 </div>
@@ -15,8 +16,8 @@
 import axios from 'axios'
 import Item from './Item.vue'
 export default {
-    name: 'Movies',
-    props:["id"],
+    name: 'Row',
+    props:["search","id","genres"],
     components: {
 		Item
     },
@@ -30,23 +31,24 @@ export default {
 			maxRight:true,
 		}
 	},
+	watch:{
+		search: function(){
+			this.querry="&query="+this.search;
+			if(this.querry=="&query="){
+				this.querry="&query=a"
+			}
+			this.getMovie();
+		},
+	},
 	created(){
+		this.querry="&query=a";
 		this.getMovie();
-	}, 
+	},
     methods:{
 		getMovie(){
 			axios.get(this.APIUrl+this.id+this.key+this.querry).then(response => {
 				this.movies=response.data.results;
 			})
-			axios.get(this.APIUrl+this.id+this.key+this.querry).then(response => {
-				this.series=response.data.results;
-			})
-			},
-		getsearch(info){
-			this.querry="&query="+info;
-			if(this.querry!="&query="){
-				this.getMovie();
-			}
 		},
 		scroll_left() {
 			let content = document.querySelector("#"+this.id);

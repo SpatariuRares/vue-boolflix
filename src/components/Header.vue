@@ -15,9 +15,9 @@ export default {
   components:{
     Search,
   },
+  props:["genres"],
   methods:{
     getsearch(info){
-      console.log(info)
       this.$emit('search',info)
     }
   }
