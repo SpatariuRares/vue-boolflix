@@ -74,12 +74,19 @@
 					</p>
 				</div>
 				<div class="d-flex flex-wrap">
-					<span>
+					<p>
 						cast: 
-					</span>
-					<p v-for="(actor,index) in cast" :key="actor.name+index">
-						{{actor.character}}: {{actor.name}}
 					</p>
+					<div class="container">
+						<div class="row">
+							<div v-for="(actor,index) in cast" :key="actor.name+index" class="d-flex col-4 flex-column align-items-center actor ">
+								<img :src="`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${actor.profile_path}`"  alt="">
+								<p >
+									{{actor.character}}: {{actor.name}}
+								</p>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="d-flex">
 					<span>
@@ -265,6 +272,13 @@ export default {
 				overflow-y:scroll;
 				-ms-overflow-style: none;  /* Internet Explorer 10+ */
 				scrollbar-width: none;
+				.actor{
+					img{
+						width: 150px;
+						height: 150px;
+						border-radius:50%;
+					}
+				}
 				p{
 					padding: 0 20px;
 					&.gener{
