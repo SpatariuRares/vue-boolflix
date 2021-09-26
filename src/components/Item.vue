@@ -5,7 +5,8 @@
 				<div class="poster" v-if="item.poster_path">
 						<img :src="`https://image.tmdb.org/t/p/w342${item.poster_path}`"  alt="">
 				</div>
-				<div class="poster not_film" v-else>
+				<div class="poster not_film position-relative" v-else>
+					<font-awesome-icon class="position-absolute top-50 start-50 translate-middle" icon="eye-slash"/>
 				</div>
 		</div>
 		<div class=" info">
@@ -34,11 +35,12 @@
 			<p v-for="(actor,index) in cast" :key="index">
 				{{actor.character}}: {{actor.name}}
 			</p>
-			<p >
+				<span>
+					gener:
+				</span> 
 				<span v-for="(genre,index) in genersName" :key="index">
 					{{genre.name}}
 				</span>
-			</p>
 		</div>
 	</div>
 </li>
@@ -173,7 +175,9 @@ export default {
 		}
 		
     .not_film{
-        background-color: black;
+        background-color: #444;
+		color: #222;
+		font-size: 4rem
     }
     .yellow{
         color: yellow;
