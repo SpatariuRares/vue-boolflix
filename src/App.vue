@@ -67,19 +67,6 @@ export default {
       });
     });
   },
-  watch:{
-		genres: function(){
-			let array=[];
-			for (let i = 0; i < this.item.genre_ids.length; i++) {
-				for (let j = 0; j < this.genres.length-1; j++) {
-					if(this.item.genre_ids[i]==this.genres[j].id){
-						array.push(this.genres[j])
-					}
-				}
-			}
-			this.genersName=array
-		},
-	},
   methods:{
     getsearch(info){
       this.search=info;

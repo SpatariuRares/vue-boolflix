@@ -1,5 +1,5 @@
 <template>
-  <select name="" id="" v-model="option" @change="getoption">
+  <select class="px-2" name="" id="" v-model="option" @change="getoption">
     <option value="all">all</option>
     <option v-for="(option,index) in genersName" :key="index" :value="option.id" >{{option.name}}</option>
   </select>

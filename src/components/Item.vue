@@ -63,7 +63,6 @@ export default {
 	},
 	created(){
 		this.getcast();
-		this.getgenres();
 	},
 	watch:{
 		genres: function(){
