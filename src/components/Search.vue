@@ -30,5 +30,9 @@ export default {
 
 input[type="text"]{
     border-radius: 0;
+    background-color: #222;
+    color: #444;
+    border: 0;
+    box-shadow: 0 0;
 }
 </style>

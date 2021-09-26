@@ -1,49 +1,99 @@
 <template>
-<li v-if="getShow()">
-	<div class="box-movie">
-		<div class="image">
-				<div class="poster" v-if="item.poster_path">
-						<img :src="`https://image.tmdb.org/t/p/w342${item.poster_path}`"  alt="">
-				</div>
-				<div class="poster not_film position-relative" v-else>
-					<font-awesome-icon class="position-absolute top-50 start-50 translate-middle" icon="eye-slash"/>
-				</div>
-		</div>
-		<div class=" info">
-			<country-flag :country='getFlag(item.original_language)' size='small'/>
-			<p>
+<div v-if="getShow()">
+	<li @click="showdetail()">
+		<div class="box-movie">
+			<div class="image">
+					<div class="poster" v-if="item.poster_path">
+							<img :src="`https://image.tmdb.org/t/p/w342${item.poster_path}`"  alt="">
+					</div>
+					<div class="poster not_film position-relative" v-else>
+						<font-awesome-icon class="position-absolute top-50 start-50 translate-middle" icon="eye-slash"/>
+					</div>
+			</div>
+			<div class=" info">
+				<country-flag :country='getFlag(item.original_language)' size='small'/>
+				<p>
+					<span>
+						Titolo: 	
+					</span>
+					{{item.original_title}}
+				</p>
+				<p>
+					<span>
+						voto: 
+					</span>
+					<font-awesome-icon icon="star" v-for="(n,index) in 5" :class="getActive(item.vote_average,n)" :key="index"/>
+				</p>
+				<p>
+					<span>
+						overview: 
+					</span>
+					{{item.overview}}
+				</p>
 				<span>
-					Titolo: 	
+					cast: 
 				</span>
-				{{item.original_title}}
-			</p>
-			<p>
-				<span>
-					voto: 
-				</span>
-				<font-awesome-icon icon="star" v-for="(n,index) in 5" :class="getActive(item.vote_average,n)" :key="index"/>
-			</p>
-			<p>
-				<span>
-					overview: 
-				</span>
-				{{item.overview}}
-			</p>
-			<span>
-				cast: 
-			</span>
-			<p v-for="(actor,index) in cast" :key="index">
-				{{actor.character}}: {{actor.name}}
-			</p>
+				<p v-for="(actor,index) in cast" :key="actor.name+index">
+					{{actor.character}}: {{actor.name}}
+				</p>
 				<span>
 					gener:
 				</span> 
-				<span v-for="(genre,index) in genersName" :key="index">
+				<span v-for="(genre,index) in genersName" :key="genre.name+index">
 					{{genre.name}}
 				</span>
+			</div>
+		</div>
+	</li>
+	<div v-if="detail" @click="hidedetail()" class=" detail-container">
+		<div class="position-absolute top-50 start-50 translate-middle info">
+			<img :src="`https://image.tmdb.org/t/p/w342${item.backdrop_path}`"  alt="">
+			<div class="text">
+				<div class="d-flex justify-content-between">
+					<div class="d-flex align-items-center">
+						<span>
+							Titolo: 	
+						</span>
+						<h2>
+							{{item.original_title}}
+						</h2>
+					</div>
+					<div>
+						<span>
+							voto: 
+						</span>
+						<font-awesome-icon icon="star" v-for="(n,index) in 5" :class="getActive(item.vote_average,n)" :key="index"/>
+					</div>
+				</div>
+				<div class="d-flex">
+					<span>
+						overview: 
+					</span>
+					<p>
+						{{item.overview}}
+					</p>
+				</div>
+				<div class="d-flex flex-wrap">
+					<span>
+						cast: 
+					</span>
+					<p v-for="(actor,index) in cast" :key="actor.name+index">
+						{{actor.character}}: {{actor.name}}
+					</p>
+				</div>
+				<div class="d-flex">
+					<span>
+						gener:
+					</span> 
+					<p class="gener" v-for="(genre,index) in genersName" :key="genre.name+index">
+						{{genre.name}}
+					</p>
+
+				</div>
+			</div>
 		</div>
 	</div>
-</li>
+</div>
 </template>
 
 <script>
@@ -61,6 +111,7 @@ export default {
 			key:"?api_key=d372f19f679767467d9a71f921e1c8f4",
 			cast:[],
 			genersName:[],
+			detail:false
 		}
 	},
 	created(){
@@ -80,6 +131,12 @@ export default {
 		},
 	},
     methods:{
+		showdetail(){
+			this.detail=true;
+		},
+		hidedetail(){
+			this.detail=false;	
+		},
 		getcast(){
 			let id = this.item.id;
 			id+="/credits"
@@ -182,6 +239,46 @@ export default {
     .yellow{
         color: yellow;
     } 
+	.detail-container{
+		position: fixed;
+		width: 100%;
+		height: 100vh;
+		background-color:rgba(0,0,0,0.5);
+		z-index: 999;
+		top : 0;
+		left: 0;
+		.info{
+			overflow: hidden;
+			width: 60%;
+			height: 80%;
+			background-color:#333;
+			border-radius: 3em;
+			color: white;
+			img{
+				width: 100%;
+				height:50%;
+				object-fit: cover;
+			}
+			.text{
+				padding: 10px 30px;
+				height:50%;
+				overflow-y:scroll;
+				-ms-overflow-style: none;  /* Internet Explorer 10+ */
+				scrollbar-width: none;
+				p{
+					padding: 0 20px;
+					&.gener{
+						padding: 0 5px;
+					}
+				}
+				&::-webkit-scrollbar {
+				width: 0;  /* Remove scrollbar space */
+				height:0 ;
+				background: transparent;  /* Optional: just make scrollbar invisible */
+			}
+			}
+		}
+	}
 @keyframes slit-out-vertical {
    0% {
     transform: rotateY(0);

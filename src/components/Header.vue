@@ -1,15 +1,19 @@
 <template>
   <div class="row justify-content-between py-4 px-2">
-    <h1 class="col-4">BOOLFLIX</h1>
+    <div class="col-4">
+      <h1 @click="home">BOOLFLIX</h1>
+    </div>
+    <div class="row col-4">
       <Selection
         :options="genres"
         @filtergerne="filtergerne"
-        class="col-2"
+        class="col-6"
       />
       <Search 
       @search="getsearch"
-      class="col-4"
+      class="col-6"
       />
+    </div>
   </div>
 </template>
 
@@ -30,6 +34,10 @@ export default {
     }
   },
   methods:{
+    home(){
+      this.$emit('search',"a")
+      this.$emit('filtergerne',"all");
+    },
     getsearch(info){
       this.$emit('search',info)
     },
@@ -48,6 +56,8 @@ div{
 }
 h1{
   color: #f00;
+  cursor: pointer;
+  display: inline-block;
   font-weight: 900;
 }
 </style>
