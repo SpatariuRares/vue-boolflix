@@ -12,12 +12,17 @@
 			</div>
 			<div class=" info">
 				<country-flag :country='getFlag(item.original_language)' size='small'/>
-				<p>
+				<div class="d-flex align-items-center">
 					<span>
 						Titolo: 	
 					</span>
-					{{item.original_title}}
-				</p>
+					<div v-if="item.original_title!=null">
+						{{item.original_title}}
+					</div>
+					<div v-else>
+						{{item.name}}
+					</div>
+				</div>
 				<p>
 					<span>
 						voto: 
@@ -55,9 +60,12 @@
 							<span>
 								Titolo: 	
 							</span>
-							<h2>
+							<h4	 v-if="item.original_title!=null">
 								{{item.original_title}}
-							</h2>
+							</h4	>
+							<h4	 v-else>
+								{{item.name}}
+							</h4	>
 						</div>
 						<div>
 							<span>
@@ -81,7 +89,10 @@
 						<div class="container">
 							<div class="row">
 								<div v-for="(actor,index) in cast" :key="actor.name+index" class="d-flex col-4 flex-column align-items-center actor ">
-									<img :src="`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${actor.profile_path}`"  alt="">
+									<img v-if="actor.profile_path!=null" :src="`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${actor.profile_path}`"  alt="">
+									<div v-else class="not_image position-relative">
+										<font-awesome-icon class="position-absolute top-50 start-50 translate-middle" icon="user-slash"/>
+									</div>
 									<p >
 										{{actor.character}}: {{actor.name}}
 									</p>
@@ -288,6 +299,14 @@ export default {
 						width: 150px;
 						height: 150px;
 						border-radius:50%;
+					}
+					.not_image{
+						background-color:#444;
+						width: 150px;
+						aspect-ratio: 1/1;
+						border-radius:50%;
+						color:#222;
+						font-size:2em
 					}
 				}
 				p{
