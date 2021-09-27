@@ -30,9 +30,11 @@ import axios from 'axios'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { faUserSlash } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faStar)
 library.add(faEyeSlash)
+library.add(faUserSlash)
 export default {
   name: 'App',
   components: {

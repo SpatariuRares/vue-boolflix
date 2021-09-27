@@ -46,7 +46,9 @@ export default {
 	},
 	created(){
 		this.querry="&query=a";
-		this.getMovie();
+		axios.get("https://api.themoviedb.org/3/"+this.id+"/popular"+this.key).then(response => {
+			this.movies=response.data.results;
+		})
 	},
     methods:{
 		getMovie(){

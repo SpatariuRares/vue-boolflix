@@ -11,7 +11,7 @@
 					</div>
 			</div>
 			<div class=" info">
-				<country-flag :country='getFlag(item.original_language)' size='small'/>
+				<country-flag :country='getFlag(item.original_language)' size='medium'/>
 				<div class="d-flex align-items-center">
 					<span>
 						Titolo: 	
@@ -149,6 +149,9 @@ export default {
 			}
 			this.genersName=array
 		},
+		item:function(){
+			this.getcast();
+		}
 	},
     methods:{
 		showdetail(){
