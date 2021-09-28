@@ -11,8 +11,8 @@
 					</div>
 			</div>
 			<div class=" info">
-				<country-flag :country='getFlag(item.original_language)' size='medium'/>
-				<div class="d-flex align-items-center">
+				<country-flag :country='getFlag(item.original_language)' size='normal'/>
+				<div class="d-flex">
 					<span>
 						Titolo: 	
 					</span>
@@ -27,7 +27,10 @@
 					<span>
 						voto: 
 					</span>
-					<font-awesome-icon icon="star" v-for="(n,index) in 5" :class="getActive(item.vote_average,n)" :key="index"/>
+					<StarRating
+					:item="item"
+					/>
+					<!-- <font-awesome-icon icon="star" v-for="(n,index) in 5" :class="getActive(item.vote_average,n)" :key="index"/> -->
 				</p>
 				<p>
 					<span>
@@ -118,12 +121,14 @@
 
 <script>
 import CountryFlag from 'vue-country-flag'
+import StarRating from './StarRating.vue'
 import axios from 'axios'
 export default {
     name: "Item",
 	props:["item","genres","filtergerner"],
     components: {
         CountryFlag,
+		StarRating,
     },
 	data(){
 		return {
