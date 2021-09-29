@@ -2,7 +2,7 @@
 <div class="movie">
 	<button class="bottoni left" v-if="maxLeft" @click="scroll_left"><font-awesome-icon icon="chevron-left"/></button>
 	<button class="bottoni right" v-if="maxRight" @click="scroll_right"><font-awesome-icon icon="chevron-right"/></button>
-	<ul class="row d-flex flex-nowrap wrap-box" :id="id">
+	<ul class="row d-flex flex-nowrap wrap-box" ref="row">
 		<Item
 			v-for="(movie,index) in movies" :key="index" class="col-2"
 			:item="movie"
@@ -57,8 +57,8 @@ export default {
 			})
 		},
 		scroll_left() {
-			let content = document.querySelector("#"+this.id);
-			content.scrollLeft -= 250;
+			let content = this.$refs.row;
+			content.scrollLeft -= content.scrollWidth/6;
 			if(content.scrollLeft==0){
 				this.maxLeft= false
 			}
@@ -73,8 +73,8 @@ export default {
 			}
 		},
 		scroll_right() {
-			let content = document.querySelector("#"+this.id);
-			content.scrollLeft += 250;
+			let content = this.$refs.row;
+			content.scrollLeft += content.scrollWidth/6;
 			if(content.scrollLeft==0){
 				this.maxLeft= false
 			}
