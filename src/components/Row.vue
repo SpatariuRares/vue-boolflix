@@ -59,7 +59,7 @@ export default {
 		scroll_left() {
 			let content = this.$refs.row;
 			content.scrollLeft -= content.scrollWidth/6;
-			if(content.scrollLeft==0){
+			if(content.scrollLeft>=10){
 				this.maxLeft= false
 			}
 			else{
@@ -75,7 +75,7 @@ export default {
 		scroll_right() {
 			let content = this.$refs.row;
 			content.scrollLeft += content.scrollWidth/6;
-			if(content.scrollLeft==0){
+			if(content.scrollLeft>=10){
 				this.maxLeft= false
 			}
 			else{
@@ -124,6 +124,7 @@ export default {
 }
 .wrap-box{
 	overflow: scroll;
+	scroll-behavior: smooth;
 	-ms-overflow-style: none;  /* Internet Explorer 10+ */
 	scrollbar-width: none;
 }

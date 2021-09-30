@@ -74,7 +74,9 @@
 							<span>
 								voto: 
 							</span>
-							<font-awesome-icon icon="star" v-for="(n,index) in 5" :class="getActive(item.vote_average,n)" :key="index"/>
+							<StarRating
+							:item="item"
+							/>
 						</div>
 					</div>
 					<div class="d-flex">
