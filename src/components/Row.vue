@@ -4,7 +4,7 @@
 	<button class="bottoni right" v-if="maxRight" @click="scroll_right"><font-awesome-icon icon="chevron-right"/></button>
 	<ul class="row d-flex flex-nowrap wrap-box" ref="row">
 		<Item
-			v-for="(movie,index) in movies" :key="index" class="col-2"
+			v-for="(movie,index) in movies" :key="index" class="col-lg-2 col-6"
 			:item="movie"
 			:genres="genres"
 			:filtergerner="filtergerner"
