@@ -9,6 +9,7 @@
 			:genres="genres"
 			:filtergerner="filtergerner"
 		/>
+		ciaosdasdasd
 	</ul>
 </div>
 </template>
@@ -78,10 +79,12 @@ export default {
 			let content = this.$refs.row;
 			content.scrollLeft += content.scrollWidth/6;
 			if(content.scrollLeft>=10){
-				this.maxLeft= false
+				this.maxLeft= false;
+				console.log(content.scrollLeft)
 			}
 			else{
-				this.maxLeft= true
+				this.maxLeft= true;
+				console.log(content.scrollLeft)
 			}
 			if(content.scrollLeft>=(content.scrollWidth-content.offsetWidth - 2)){
 				this.maxRight= false
