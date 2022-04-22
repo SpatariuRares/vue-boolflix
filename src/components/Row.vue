@@ -79,11 +79,11 @@ export default {
 			let content = this.$refs.row;
 			content.scrollLeft += content.scrollWidth/6;
 			if(content.scrollLeft>=10){
-				this.maxLeft= false;
+				this.maxLeft= true;
 				console.log(this.maxLeft,content.scrollLeft)
 			}
 			else{
-				this.maxLeft= true;
+				this.maxLeft= false;
 				console.log(this.maxLeft,content.scrollLeft)
 			}
 			if(content.scrollLeft>=(content.scrollWidth-content.offsetWidth - 2)){
