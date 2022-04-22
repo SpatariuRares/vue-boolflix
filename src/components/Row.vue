@@ -57,16 +57,13 @@ export default {
 			})
 		},
 		scroll_left() {
-			console.log('ciao');
 			let content = this.$refs.row;
 			content.scrollLeft -= content.scrollWidth/6;
 			if(content.scrollLeft<=10){
-				this.maxLeft= false
-				console.log(this.maxLeft,content.scrollLeft)
+				this.maxLeft= false				
 			}
 			else{
 				this.maxLeft= true
-				console.log(this.maxLeft,content.scrollLeft)
 			}
 			if(content.scrollLeft>=(content.scrollWidth-content.offsetWidth - 2)){
 				this.maxRight= false
